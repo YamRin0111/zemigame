@@ -18,8 +18,13 @@
       justify-content: center;
       height: 100vh;
     }
-    #title-screen, #game-screen, #map-screen, #result-screen, #final-score-screen {
+    #title-screen, #game-screen, #map-screen, #result-screen, #final-score-screen, #detail-screen {
       display: none;
+      flex-direction: column;
+      align-items: center;
+    }
+    #rules-screen {
+      display: flex;
       flex-direction: column;
       align-items: center;
     }
@@ -51,8 +56,8 @@
 
   <!-- ルール説明画面 -->
   <div id="rules-screen">
-    <h2>ルール説明</h2>
-    <p>画面に表示される画像がどの位置で撮影されたかを推理してください。地図をクリックして座標を選択し、結果を確認しましょう！</p>
+    <h2><ルール説明></h2>
+    <p>画面に表示される画像がどの位置で撮影されたかを推理してください。地図をクリックして座標を選択し、結果を確認しましょう！<br />最終スコアのランクに応じてクリア後に表示されるコメントが変化します。より良いコメントを目指して何度も挑戦しましょう！<br />*問題はランダムに出題されるため、重複したり連続したりすることがあります。</p>
     <p>
      <font color="#C71585">《回答の際のヒント》</font><br />
        画像に写っている場所をそのまま回答するのではなく、撮影者がどの位置から撮影したかを推測し、回答すると、よりスコアが高くなります。背景などをヒントに撮影場所を推測しましょう。</p>
@@ -78,7 +83,16 @@
     <h2>結果発表</h2>
     <p id="result-text"></p>
     <div id="result-map"></div>
-    <button onclick="nextRound()">次へ</button>
+    <button onclick="showDetails()">詳細</button> <!-- 詳細ボタン -->
+  </div>
+
+  <!-- 詳細画面 -->
+  <div id="detail-screen" style="display: none;">
+    <h2>詳細情報</h2>
+    <img id="result-image" src="" alt="問題画像" style="max-width: 80%; max-height: 60vh; margin-bottom: 20px;">
+    <p id="image-description"></p>
+    <button onclick="nextRound()">次へ</button> <!-- 次へボタン -->
+    <button onclick="onemoreDetail()">位置を確認する</button> <!-- 位置ボタン -->
   </div>
 
   <!-- 最終スコア画面 -->
@@ -86,9 +100,10 @@
     <h2>ゲーム終了！</h2>
     <p id="final-score-text"></p>
     <button onclick="restartGame()">再挑戦</button>
+    <button onclick="goAnk()">アンケートに答える</button>
   </div>
 </div>
 
-<script src="script4.js"></script>
+<script src="script5.js"></script>
 </body>
 </html>
