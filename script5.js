@@ -112,7 +112,7 @@ function submitGuess() {
 
   // 結果地図を初期化
   resultMap = new google.maps.Map(document.getElementById('result-map'), {
-    zoom: 15,
+    zoom: 12,
     center: selectedLocation, // 正解の位置を中心に
   });
 
