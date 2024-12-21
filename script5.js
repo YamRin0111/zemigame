@@ -32,6 +32,7 @@ let userGuess = null;
 let resultMap = null;
 let currentRound = 1;
 let totalScore = 0;
+let remainingLocations = [];
 
 function showRules() {
   document.getElementById('title-screen').style.display = 'none';
@@ -46,16 +47,30 @@ function goToTitle() {
 function startGame() {
   document.getElementById('title-screen').style.display = 'none';
   document.getElementById('game-screen').style.display = 'flex';
-  currentRound = 1;
   totalScore = 0;
+  remainingLocations = [...locations]; // locations 配列のコピー
+  shuffleArray(remainingLocations); // シャッフルする
+  currentRound = 1;
   loadRound();
 }
 
 function loadRound() {
   document.getElementById('round-number').innerText = currentRound;
-  const randomIndex = Math.floor(Math.random() * locations.length);
-  selectedLocation = locations[randomIndex];
-  document.getElementById('random-image').src = selectedLocation.image;
+
+  // remainingLocations から1つを取り出す
+  selectedLocation = remainingLocations.shift(); // 配列から先頭の要素を取得して削除
+  if (selectedLocation) {
+    document.getElementById('random-image').src = selectedLocation.image;
+  } else {
+    console.error('ロケーションが不足しています！');
+  }
+}
+
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
 }
 
 function goToMap() {
